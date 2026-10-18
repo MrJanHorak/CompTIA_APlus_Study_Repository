@@ -2,17 +2,21 @@
 
 ## Exam Domain Breakdown
 
-| Domain | Topic                                | Approximate Weight |
+| Domain | Topic                                | Exam Weight |
 | ------ | ------------------------------------ | ------------------ |
-| 1.0    | Mobile Devices                       | 15%                |
+| 1.0    | Mobile Devices                       | 13%                |
 | 2.0    | Networking                           | 23%                |
 | 3.0    | Hardware                             | 25%                |
-| 4.0    | Virtualization and Cloud Computing   | 12%                |
-| 5.0    | Hardware and Network Troubleshooting | 25%                |
+| 4.0    | Virtualization and Cloud Computing   | 11%                |
+| 5.0    | Hardware and Network Troubleshooting | 28%                |
+
+> Source: [CompTIA 220-1201 objectives, document version 4.0](https://lecbyo.files.cmp.optimizely.com/download/34be017cb73211ef8985a6f347fbf652). See the [objective coverage map](../Resources/Objective_Coverage.md) for scope and further practice.
+
+---
 
 ## How to Study Core 1
 
-- **Highest priority:** Domains 3.0 (Hardware) and 2.0 (Networking) together make up 48% of the exam. Invest proportional study time.
+- **Highest priority:** Domains 5.0 (Hardware and Network Troubleshooting) and 3.0 (Hardware) together make up 53% of the exam. Invest proportional study time.
 - **Hands-on:** Do not just memorize hardware specs — handle physical components when possible, or use virtual labs for network configuration.
 - **Flashcards:** Build a deck for RAM pin counts, RAID levels, wireless standards, and port numbers before moving to Core 2.
 

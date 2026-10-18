@@ -39,9 +39,19 @@ If you add content derived from a specific resource (book, video, official objec
 > Source: CompTIA A+ Exam Objectives v15, Domain 3.0
 ```
 
+### Review and Maintenance
+
+- Link to a primary source for factual corrections and record the review date for exam metadata and external resources.
+- Keep the [objective coverage map](Resources/Objective_Coverage.md) aligned with note changes. Coverage means introductory notes, not complete mastery.
+- For labs, specify application/guest versions, host architecture, exact addressing and expected results. Record whether the workflow was actually run; do not label a lab tested from document inspection alone.
+- Describe free, account-required and paid access separately. Disclose complimentary reviewer access when used, avoid fixed promotional counts, and evaluate providers by the same criteria.
+- Recheck exam status, source links, operating-system support, resource access and book editions before each release and at least every six months.
+
+---
+
 ### Scope
 
-- Do not add content that is not testable on the A+ Core 1 or Core 2 exams.
+- Focus on A+ objectives. Clearly label supporting professional practices (such as the troubleshooting methodology) that are useful but not directly tested.
 - Do not include exam dumps, leaked questions, or content from paid exams.
 - Do not add affiliate links.
 

@@ -12,7 +12,7 @@
 | **RAID 1**  | Mirroring                   | 2               | **1 disk**         | 50%             | Good      | Same as single disk |
 | **RAID 5**  | Striping with Parity        | 3               | **1 disk**         | (n−1) × disk    | Good      | Moderate            |
 | **RAID 6**  | Striping with Double Parity | 4               | **2 disks**        | (n−2) × disk    | Good      | Slow                |
-| **RAID 10** | Mirrored Stripe (RAID 1+0)  | 4 (even number) | **1–2 disks**      | 50%             | Excellent | Excellent           |
+| **RAID 10** | Mirrored Stripe (RAID 1+0)  | 4 (even number) | **1 guaranteed; up to n/2 if one per mirror pair**      | 50%             | Excellent | Excellent           |
 
 ---
 
@@ -45,9 +45,12 @@ Disk 2: [Exact duplicate of Disk 1]
 ### RAID 5 — Striping with Parity
 
 ```
-Disk 1: [A1] [A2] [Ap] (Ap = parity for stripe A)
-Disk 2: [A3] [Bp] [B1]
-Disk 3: [Bp] [B2] [B3]
+           Stripe A  Stripe B  Stripe C
+Disk 1:    [A1]      [B1]      [Cp]
+Disk 2:    [A2]      [Bp]      [C1]
+Disk 3:    [Ap]      [B2]      [C2]
+
+Each column has two data blocks and one parity block (p).
 ```
 
 - Data and parity information are striped across all drives
@@ -87,7 +90,7 @@ Mirror Set 2:  Disk 3 ↔ Disk 4 (mirrored pair)
 | RAID 1     | **1** (unless the surviving disk also fails during rebuild)                    |
 | RAID 5     | **1**                                                                          |
 | RAID 6     | **2**                                                                          |
-| RAID 10    | **1–2** (1 per mirror pair maximum; can lose 2 if they are in different pairs) |
+| RAID 10    | **1 guaranteed**; up to n/2 if each failure is in a different mirror pair. In a four-drive array, two failures are survivable only in different pairs. |
 
 ---
 
@@ -96,10 +99,14 @@ Mirror Set 2:  Disk 3 ↔ Disk 4 (mirrored pair)
 | RAID Level | Formula                       | Example (4 × 2 TB drives) |
 | ---------- | ----------------------------- | ------------------------- |
 | RAID 0     | n × disk size                 | 4 × 2 TB = **8 TB**       |
-| RAID 1     | disk size (only 1 drive used) | 2 TB usable               |
+| RAID 1 (four-way mirror) | disk size (all four drives hold the same data) | 2 TB usable |
 | RAID 5     | (n−1) × disk size             | 3 × 2 TB = **6 TB**       |
 | RAID 6     | (n−2) × disk size             | 2 × 2 TB = **4 TB**       |
 | RAID 10    | (n/2) × disk size             | 2 × 2 TB = **4 TB**       |
+
+---
+
+> Capacity examples assume equal-size drives. The summary describes a two-drive RAID 1 mirror (50% usable, one failure tolerated); the four-way RAID 1 example above has 25% usable capacity and can survive up to three drive failures while one good copy remains. Two independent two-drive mirrors would instead form two arrays, with 4 TB total usable capacity.
 
 ---
 

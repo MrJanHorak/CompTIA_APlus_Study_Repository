@@ -13,7 +13,7 @@
 | DDR (DDR1) | 184       | 2.5V                   | —                         | Original double data rate                        |
 | DDR2       | 240       | 1.8V                   | Different from DDR3       | Faster clock, lower voltage than DDR             |
 | DDR3       | 240       | 1.5V (1.35V low-power) | Different from DDR2       | Lower power than DDR2                            |
-| **DDR4**   | **288**   | 1.2V                   | —                         | Current mainstream standard                      |
+| **DDR4**   | **288**   | 1.2V                   | —                         | Used by DDR4 desktop platforms                      |
 | **DDR5**   | **288**   | 1.1V                   | Different notch from DDR4 | Faster, higher density, on-DIMM power management |
 
 > Both DDR3 and DDR4 differ in pin count (240 vs 288). DDR4 and DDR5 have the same pin count (288) but different notch positions — they are **not** interchangeable.
@@ -24,8 +24,8 @@
 | ----------------- | --------- | ----------------------------- |
 | DDR / DDR2 SODIMM | 200       | Legacy laptops                |
 | DDR3 SODIMM       | 204       | Many mid-generation laptops   |
-| **DDR4 SODIMM**   | **260**   | Current laptop standard       |
-| DDR5 SODIMM       | 262       | Cutting-edge platform laptops |
+| **DDR4 SODIMM**   | **260**   | Used by DDR4 laptop platforms       |
+| DDR5 SODIMM       | 262       | Used by DDR5 laptop platforms |
 
 ### RAM Types by Characteristic
 
@@ -66,8 +66,12 @@
 | Key         | Protocol Supported      | Notes                                         |
 | ----------- | ----------------------- | --------------------------------------------- |
 | **M key**   | NVMe (PCIe) and/or SATA | Can support both; check motherboard spec      |
-| **B key**   | SATA only               | Uncommon                                      |
-| **B+M key** | SATA and NVMe           | Universal; most M.2 SSDs ship with B+M keying |
+| **B key** | SATA or PCIe up to x2 | Depends on the drive and host implementation |
+| **B+M key** | SATA or PCIe up to x2, depending on the drive | Fits compatible B/M sockets; protocol support must match |
+
+---
+
+> Keying establishes mechanical fit, not universal compatibility. Match the SSD's SATA/PCIe protocol, lane count and physical length to the motherboard manual. Source: [Kingston M.2 FAQ](https://www.kingston.com/en/ssd/ssd-faq).
 
 ---
 
@@ -106,11 +110,16 @@
 | USB 3.0 / 3.1 Gen 1 / 3.2 Gen 1 | 5 Gbps    | Type-A (blue) / Type-C | SuperSpeed                                     |
 | USB 3.1 Gen 2 / 3.2 Gen 2       | 10 Gbps   | Type-A / Type-C        | SuperSpeed+                                    |
 | USB 3.2 Gen 2×2                 | 20 Gbps   | Type-C only            | —                                              |
-| USB4                            | 40 Gbps   | Type-C only            | Requires Thunderbolt 3 hardware                |
+| USB4 (20/40 Gbps implementations) | Up to 40 Gbps | Type-C | Capabilities depend on implementation; Thunderbolt 3 hardware is not required |
+| USB4 Version 2.0 | Up to 80 Gbps | Type-C | Check host, device and cable capabilities |
 | Thunderbolt 3                   | 40 Gbps   | USB-C                  | Daisy-chain up to 6 devices; video output      |
 | Thunderbolt 4                   | 40 Gbps   | USB-C                  | Enhanced Thunderbolt 3 with mandatory features |
 
-> **Color coding:** USB 3.0 ports are typically **blue** inside. USB 2.0 ports are black or white. This is a common exam scenario question.
+> **Color coding:** Some USB 3.x ports use blue inserts, but manufacturers vary. Check the port label and device specifications rather than inferring speed from color alone.
+
+> Source: [USB-IF USB4 overview](https://www.usb.org/usb4). USB-C describes connector shape; verify supported speed, video mode and power delivery on both devices and the cable.
+
+---
 
 ### Audio Connectors (3.5mm TRS Color Code)
 
@@ -173,10 +182,14 @@
 | 802.11b             | 2.4 GHz         | 11 Mbps   | First popular standard |
 | 802.11g             | 2.4 GHz         | 54 Mbps   |                        |
 | 802.11n (Wi-Fi 4)   | 2.4/5 GHz       | 600 Mbps  | Introduced MIMO        |
-| 802.11ac (Wi-Fi 5)  | 5 GHz           | 3.5 Gbps  | MU-MIMO, beamforming   |
+| 802.11ac (Wi-Fi 5)  | 5 GHz           | 6.9 Gbps  | MU-MIMO, beamforming   |
 | 802.11ax (Wi-Fi 6)  | 2.4/5 GHz       | 9.6 Gbps  | OFDMA                  |
 | 802.11ax (Wi-Fi 6E) | 2.4/5/**6 GHz** | 9.6 Gbps  | Added 6 GHz band       |
-| 802.11be (Wi-Fi 7)  | 2.4/5/6 GHz     | 46 Gbps   | Emerging standard      |
+| 802.11be (Wi-Fi 7)  | 2.4/5/6 GHz     | 46 Gbps   | Wi-Fi 7      |
+
+---
+
+> Wireless figures are theoretical PHY maxima, not file-transfer speeds. Wi-Fi 5's ~6.9 Gbps maximum assumes eight spatial streams and 160 MHz channels; Wi-Fi 4's 600 Mbps assumes four streams and 40 MHz, and Wi-Fi 6's ~9.6 Gbps assumes eight streams and 160 MHz. Client capabilities, interference and protocol overhead lower throughput. [Cisco reference](https://www.cisco.com/c/dam/global/en_ca/assets/ciscoconnect/2013/assets/docs/wireless-feature-updates-ian-procyk-cisco-connect-2013-toronto.pdf).
 
 ---
 

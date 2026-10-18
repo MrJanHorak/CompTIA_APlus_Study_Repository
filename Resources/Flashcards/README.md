@@ -23,11 +23,15 @@ For the A+ exam, which requires memorizing hundreds of discrete facts (port numb
 
 | Feature                     | Anki                            | Quizlet                                |
 | --------------------------- | ------------------------------- | -------------------------------------- |
-| Spaced repetition algorithm | Advanced (SM-2)                 | Basic / none in free tier              |
+| Spaced repetition algorithm | FSRS or legacy SM-2                 | Basic / none in free tier              |
 | Offline use                 | Full functionality              | Limited                                |
-| Cost                        | Free (Android/Desktop); $25 iOS | Free basic; $35/year for full features |
+| Cost                        | Free desktop/AnkiDroid; paid AnkiMobile for iOS | Free basic; paid features and regional prices vary |
 | Deck sharing                | AnkiWeb community               | Large community                        |
 | Customization               | Highly configurable             | Limited                                |
+
+---
+
+> Anki supports FSRS for adaptive scheduling as well as its legacy SM-2 scheduler. Review [Anki’s deck-options documentation](https://docs.ankiweb.net/manual/deck-options) before changing schedulers, and use compatible versions on all synced devices. The official Android client is AnkiDroid; AnkiMobile for iOS is a separate paid app.
 
 ---
 
@@ -46,7 +50,7 @@ Before building your own deck from scratch, search for community decks:
 ### AnkiWeb Shared Decks
 
 1. Open Anki → Click **Get Shared** (at the bottom)
-2. Search: "CompTIA A+ 1201" or "CompTIA A+ 220-1102"
+2. Search: "CompTIA A+ 1201" or "CompTIA A+ 220-1202"
 3. Preview the deck to verify quality and alignment with current objectives
 4. Download and import
 
@@ -103,7 +107,7 @@ Build one sub-deck per category for organized review:
 | **RAID Levels**                 | RAID level → function, min disks, fault tolerance     |
 | **Wireless Standards**          | 802.11x → frequency, speed, key feature               |
 | **CLI Commands**                | Command → function; task → command                    |
-| **Troubleshooting Methodology** | Step number → name and key action                     |
+| **Troubleshooting Methodology** | Professional workflow practice; not directly tested as a V15 methodology objective                     |
 | **Malware Types**               | Type → definition and key characteristics             |
 | **OSI Layers**                  | Layer number/name → protocols/devices                 |
 | **Security Concepts**           | Term → definition                                     |
@@ -134,9 +138,9 @@ Switch to "Custom Study" → Review ahead of time → Show cards due in the next
 
 If you prefer Quizlet:
 
-1. Search [quizlet.com](https://www.quizlet.com) for "CompTIA A+ 1201" or "CompTIA A+ 220-1102"
+1. Search [quizlet.com](https://www.quizlet.com) for "CompTIA A+ 1201" or "CompTIA A+ 220-1202"
 2. Filter by creation date and star rating to find active, quality decks
-3. Use the **Learn** mode (not Flashcards mode) — this implements a basic spaced repetition system
+3. Use the **Learn** mode (not Flashcards mode) — availability and behavior depend on the current plan; check its settings rather than assuming it uses Anki-style scheduling
 4. Use **Test** mode for paper-format active recall practice
 
 ---

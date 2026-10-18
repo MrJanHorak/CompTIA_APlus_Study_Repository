@@ -1,222 +1,170 @@
-# Lab 02: Network Simulation with Cisco Packet Tracer
+# Lab 02: Addressing and Fault Isolation with Cisco Packet Tracer
 
-> **Skill Area:** Networking, IP addressing, SOHO configuration, basic troubleshooting
-> **Time Required:** 45–90 minutes
-> **Cost:** Free
-> **Tools:** Cisco Packet Tracer
+> **Skills:** DHCP, static IPv4, default gateways, routing and DNS
 
----
+> **Time:** 60–90 minutes
 
-## Objectives
+> **Cost:** Free Cisco account/course access may be required
 
-By the end of this lab you will be able to:
+> **Reference interface:** Packet Tracer 8.2.x with a 2911 router and 2960 switch; menu labels can differ in newer versions
 
-1. Install Cisco Packet Tracer
-2. Build a basic SOHO network topology
-3. Configure IP addressing (static and DHCP)
-4. Verify connectivity using `ping` and `ipconfig`
-5. Identify and fix a deliberately introduced network fault
+> **Validation:** Revised by document and address-plan review October 18, 2026; not executed end to end in Packet Tracer.
 
----
+## Scope
 
-## Prerequisites
+Build an isolated simulation with two subnets. The second subnet represents a remote service; it is not the real internet. Every expected reply below has a configured destination and return path. No cloud icon, modem, real public DNS service or NAT is needed.
 
-- A computer with a web browser
-- Free Cisco Networking Academy account (required to download Packet Tracer)
+IOS commands are supplied to construct the exercise. Memorizing this router configuration is not an A+ objective.
 
----
+## Part 1: Install and Add Devices
 
-## Part 1: Download and Install Cisco Packet Tracer
+Get Packet Tracer from [Cisco Networking Academy](https://www.netacad.com/cisco-packet-tracer), following its account/course and download instructions for your supported desktop OS.
 
-Packet Tracer requires a free Cisco NetAcad account.
+Create a blank project with:
 
-1. Go to [netacad.com](https://www.netacad.com)
-2. Click **Sign Up** and create a free account
-3. After logging in, search for **Packet Tracer** in the course catalog
-4. Enroll in the free **"Getting Started with Cisco Packet Tracer"** course
-5. Find the download link in the course resources (Windows, macOS, and Linux versions available)
-6. Install Packet Tracer
-7. Launch Packet Tracer and log in with your NetAcad credentials
+- One **2911 router**, named R1.
+- One **2960 switch**, named S1.
+- Two **PC-PT** clients, named PC1 and PC2.
+- One **Server-PT**, named RemoteServer.
 
----
+Connect using copper straight-through cables:
 
-## Part 2: Build a Basic SOHO Network
-
-You will build a network that mirrors a typical small office or home office environment.
-
-### Target Topology
-
-```
-[Internet Cloud]
-       |
-   [Cable Modem]
-       |
-   [SOHO Router]
-     /    \
-[Switch]  [Wireless Laptop]
-  |   |
-[PC1] [PC2]
+```text
+PC1 FastEthernet0 ── S1 FastEthernet0/1
+PC2 FastEthernet0 ── S1 FastEthernet0/2
+S1 GigabitEthernet0/1 ── R1 GigabitEthernet0/0
+R1 GigabitEthernet0/1 ── RemoteServer FastEthernet0
 ```
 
-### Step-by-Step Build
+Use these exact device models so interface names match the commands. If your model differs, identify its ports before configuring. Wait for link negotiation; the first ping can lose a packet while ARP resolves.
 
-1. Open Packet Tracer and start a **new blank project**
+## Part 2: Address Plan
 
-2. **Add devices** (drag from the device panel at the bottom):
-   - 1× Cloud-PT (represents the internet)
-   - 1× Home Router (found under Router or Home devices)
-   - 1× Switch (2960 or equivalent)
-   - 2× PC
-   - 1× Laptop
+| Device/interface | IPv4 | Mask | Default gateway |
+| --- | --- | --- | --- |
+| R1 G0/0, LAN | 192.168.1.1 | 255.255.255.0 | Not needed for these directly connected networks |
+| R1 G0/1, remote subnet | 198.51.100.1 | 255.255.255.0 | Not needed |
+| PC1 | DHCP, normally 192.168.1.100 or later | 255.255.255.0 | 192.168.1.1 |
+| PC2 | 192.168.1.50 | 255.255.255.0 | 192.168.1.1 |
+| RemoteServer | 198.51.100.10 | 255.255.255.0 | 198.51.100.1 |
 
-3. **Connect devices** using the appropriate cables:
-   - Cloud to Router WAN port: **Ethernet straight-through**
-   - Router LAN port to Switch: **Ethernet straight-through**
-   - Switch to each PC: **Ethernet straight-through**
-   - Router to Laptop: **Wireless** (if using wireless interface) or straight-through
+198.51.100.0/24 is a documentation range used here inside the simulator. LAN addresses .1 through .99 are excluded from DHCP so PC2's static address cannot collide with the pool.
 
-> **Cable selection tip:** When unsure, select **Automatically Choose Connection Type** (the lightning bolt icon) and Packet Tracer will pick the correct cable.
+## Part 3: Configure R1
 
----
+Open R1's **CLI**, answer **no** to the initial configuration dialog if shown, and enter:
 
-## Part 3: Configure the Router
+```text
+enable
+configure terminal
+hostname R1
+interface gigabitEthernet0/0
+ ip address 192.168.1.1 255.255.255.0
+ no shutdown
+ exit
+interface gigabitEthernet0/1
+ ip address 198.51.100.1 255.255.255.0
+ no shutdown
+ exit
+ip dhcp excluded-address 192.168.1.1 192.168.1.99
+ip dhcp pool APLUS-LAN
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+ dns-server 198.51.100.10
+ exit
+end
+copy running-config startup-config
+```
 
-1. Click on the router → select the **GUI** tab (or CLI tab for command-line)
-2. Navigate to **Setup** (Basic Setup)
-3. Configure the following:
+Accept the default destination filename when saving. R1 routes between its directly connected subnets without static routes.
 
-| Setting        | Value                                 |
-| -------------- | ------------------------------------- |
-| Internet IP    | Assigned by the "ISP" (leave as DHCP) |
-| Local IP (LAN) | `192.168.1.1`                         |
-| Subnet Mask    | `255.255.255.0`                       |
-| DHCP Server    | **Enabled**                           |
-| DHCP Start IP  | `192.168.1.100`                       |
-| Max Users      | `50`                                  |
+Inspect the result:
 
-4. Click **Save Settings**
+```text
+show ip interface brief
+show ip route
+show ip dhcp binding
+```
 
----
+**Expected:** G0/0 and G0/1 show up/up once their peers are connected. The routing table has connected routes for 192.168.1.0/24 and 198.51.100.0/24. DHCP bindings appear after PC1 requests a lease.
 
-## Part 4: Configure the PCs
+## Part 4: Configure the Server and Clients
 
-### PC1 — DHCP (automatic)
+### RemoteServer
 
-1. Click on PC1 → **Desktop** tab → **IP Configuration**
-2. Select **DHCP**
-3. Wait a moment — the PC should receive an IP address from the router
-4. Record the IP address assigned: ******\_\_\_******
+1. **Desktop → IP Configuration → Static**: set 198.51.100.10, mask 255.255.255.0, gateway 198.51.100.1 and DNS 198.51.100.10.
+2. **Services → HTTP**: turn HTTP on.
+3. **Services → DNS**: turn DNS on. Add an **A record** named `web.example.test` with address **198.51.100.10**, and save/add it.
 
-### PC2 — Static IP
+### PC1
 
-1. Click on PC2 → **Desktop** tab → **IP Configuration**
-2. Select **Static**
-3. Enter:
+Choose **Desktop → IP Configuration → DHCP**. Record the assigned address, mask, gateway and DNS using **Desktop → Command Prompt → `ipconfig`**. The exact lease address depends on the simulator's allocation order.
 
-| Setting         | Value           |
-| --------------- | --------------- |
-| IP Address      | `192.168.1.50`  |
-| Subnet Mask     | `255.255.255.0` |
-| Default Gateway | `192.168.1.1`   |
-| DNS Server      | `8.8.8.8`       |
+### PC2
 
----
+Choose **Desktop → IP Configuration → Static** and set 192.168.1.50, mask 255.255.255.0, gateway 192.168.1.1 and DNS 198.51.100.10.
 
-## Part 5: Verify Connectivity
+## Part 5: Establish a Working Baseline
 
-Open the **Command Prompt** on each device (Desktop → Command Prompt) and run the following commands. Record your results.
+Run these commands from PC1's simulated Command Prompt:
 
-### From PC1
+| Command | Expected after ARP/link convergence |
+| --- | --- |
+| `ping 192.168.1.1` | Replies from the local gateway |
+| `ping 192.168.1.50` | Replies from PC2 on the same subnet |
+| `ping 198.51.100.10` | Replies from the server across R1 |
+| `ping web.example.test` | Resolves to the server and receives replies |
 
-| Test            | Command                          | Expected Result | Your Result |
-| --------------- | -------------------------------- | --------------- | ----------- |
-| Loopback        | `ping 127.0.0.1`                 | 4 replies       |             |
-| Local IP        | `ping 192.168.1.x` (your own IP) | 4 replies       |             |
-| Default gateway | `ping 192.168.1.1`               | 4 replies       |             |
-| PC2             | `ping 192.168.1.50`              | 4 replies       |             |
-| Internet        | `ping 8.8.8.8`                   | 4 replies       |             |
+In PC1's **Web Browser**, open `http://web.example.test`. **Expected:** the simulated server's HTTP page.
 
-### View IP Configuration
+If a baseline test fails, resolve it before introducing a fault. Check port state/cabling, masks, both router interfaces, the server's return gateway, and DNS/HTTP services. Record actual results. Save this working project as **APlus-Lab02-Baseline.pkt** using Packet Tracer's **File → Save As**; this file becomes your recovery point after you have verified it.
 
-On PC1, run `ipconfig` and record:
+## Part 6: Introduce One Fault
 
-| Field           | Value |
-| --------------- | ----- |
-| IPv4 Address    |       |
-| Subnet Mask     |       |
-| Default Gateway |       |
+1. Record PC1's DHCP-acquired IPv4 configuration.
+2. Select **Static** in PC1's IP Configuration. Enter the same IP, mask and DNS as the baseline, but deliberately set its gateway to **192.168.1.99**.
+3. Repeat the baseline tests.
 
----
+| Test | Expected with the wrong gateway |
+| --- | --- |
+| Ping PC2 | Works: PC2 is local |
+| Ping R1's LAN IP | Works: that interface is local |
+| Ping RemoteServer by IP | Fails: off-subnet traffic needs a valid gateway |
+| Open the server by name | Fails: DNS server is also off-subnet |
 
-## Part 6: Troubleshooting Exercise — Find and Fix the Fault
+A DNS failure here is a consequence of unreachable routing, not a missing DNS record. Ping the known server IP to separate routing from name resolution.
 
-Your instructor (or you, following the instructions below) introduces a fault into the network. Your task is to diagnose it using the CompTIA 6-step troubleshooting methodology.
+Use the professional troubleshooting framework:
 
-### Introduce the Fault
+| Step | Record |
+| --- | --- |
+| 1 — Identify | Baseline, symptoms and affected scope |
+| 2 — Theory | Suspected wrong gateway |
+| 3 — Test | Compare `ipconfig` with the address plan and compare local/remote pings |
+| 4 — Plan and implement | Restore the gateway to 192.168.1.1 |
+| 5 — Verify and prevent | Repeat all baseline tests; document the correct address plan |
+| 6 — Document | Fault, evidence, change and observed outcome |
 
-1. Click on PC1 → Desktop → IP Configuration
-2. Change the Default Gateway to `192.168.1.99` (incorrect)
-3. Click OK
+Alternatively select DHCP again to restore automatic addressing, then confirm all settings. The methodology itself is supporting professional practice, not a directly tested V15 methodology objective.
 
-### Symptoms
+## Optional DNS Fault
 
-- PC1 can ping PC2 (`192.168.1.50`) — **succeeds?** \_\_\_
-- PC1 can ping the router (`192.168.1.1`) — **succeeds?** \_\_\_
-- PC1 can ping the internet (`8.8.8.8`) — **succeeds?** \_\_\_
+After restoring the baseline, set only PC1's DNS server to unused **198.51.100.99** while preserving its correct IP, mask and gateway.
 
-### Apply the Troubleshooting Methodology
+- Ping 198.51.100.10: expected to work.
+- Resolve a name not previously used, `new.example.test`: first add this A record on RemoteServer, pointing to 198.51.100.10. With incorrect DNS it should fail.
+- Restore PC1's DNS to 198.51.100.10 and retry: expected to resolve and work.
 
-Fill in this worksheet as you diagnose:
+Using a new name avoids mistaking a cached answer for successful DNS-server access.
 
-| Step                     | Your Analysis                                |
-| ------------------------ | -------------------------------------------- |
-| 1 — Identify the Problem | What symptoms are you observing?             |
-| 2 — Theory               | What do you think is causing this?           |
-| 3 — Test the Theory      | What did you check to confirm?               |
-| 4 — Plan of Action       | What change will you make?                   |
-| 5 — Implement and Verify | What did you change? Does it work now?       |
-| 6 — Document             | Summarize the fault and fix in one sentence. |
+## Review
 
-### Expected Diagnosis
+1. Why can a client with an incorrect gateway still ping another local client?
+2. Why does RemoteServer need its own gateway?
+3. Why does a connected Cloud-PT icon alone not supply internet service?
+4. What distinguishes a routing fault from a DNS fault?
+5. Why are static addresses excluded from the DHCP pool?
 
-> **Fault:** The default gateway on PC1 was set incorrectly to `192.168.1.99` instead of `192.168.1.1`. PC1 can reach devices on the local subnet (same /24 network) but cannot route traffic beyond the subnet because it sends inter-network traffic to a non-existent gateway.
->
-> **Fix:** Set the default gateway on PC1 to `192.168.1.1`.
+Record Packet Tracer version and all baseline/fault/recovery results before calling your saved project verified.
 
----
-
-## Bonus Challenge
-
-### Challenge 1: Add a Server
-
-- Add a generic Server device to the topology
-- Assign it a static IP of `192.168.1.10`
-- Configure the PCs to use the Server's IP as their DNS server
-- Observe how DNS is used by network clients
-
-### Challenge 2: Subnet Design
-
-You have been given the network address `192.168.10.0/24`.
-
-Design two subnets — one for the office LAN and one for a guest Wi-Fi VLAN:
-
-- Office LAN: `192.168.10.0/25` (hosts 192.168.10.1–192.168.10.126)
-- Guest Wi-Fi: `192.168.10.128/25` (hosts 192.168.10.129–192.168.10.254)
-
-Modify your Packet Tracer topology to implement this addressing scheme.
-
----
-
-## Lab Summary
-
-Confirm you can answer these questions without referring to the lab steps:
-
-1. What is the difference between a DHCP-assigned IP address and a static IP address?
-2. A PC on your network has the IP address `169.254.45.23`. What does this tell you?
-3. If a device can ping its default gateway but cannot reach the internet, where is the problem?
-4. What is the purpose of specifying a default gateway on an end device?
-5. In a `/24` subnet, how many usable IP addresses are available for hosts?
-
----
-
-_Previous: [Lab 01 — Home Lab Setup](Lab_01_Home_Lab_Setup.md) | Back to: [Labs Overview](README.md)_
+_Previous: [Lab 01 — Home Lab Setup](Lab_01_Home_Lab_Setup.md) | [Labs Overview](README.md)_

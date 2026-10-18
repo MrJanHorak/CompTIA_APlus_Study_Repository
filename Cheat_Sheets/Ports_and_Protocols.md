@@ -39,8 +39,8 @@
 | 25   | SMTP              | Sending email            | Server-to-server and client-to-server            |
 | 110  | POP3              | Receiving email          | Downloads and deletes from server (typically)    |
 | 143  | IMAP              | Receiving email          | Syncs; keeps mail on server; multi-device access |
-| 465  | SMTPS             | Sending email (secure)   | SMTP over SSL — older method                     |
-| 587  | SMTP (Submission) | Sending email (secure)   | Modern SMTP with STARTTLS — preferred            |
+| 465  | SMTPS             | Sending email (secure)   | SMTP submission with implicit TLS (current)                     |
+| 587  | SMTP (Submission) | Sending email (secure)   | SMTP submission with STARTTLS; require TLS            |
 | 993  | IMAPS             | Receiving email (secure) | IMAP over SSL                                    |
 | 995  | POP3S             | Receiving email (secure) | POP3 over SSL                                    |
 
@@ -59,7 +59,8 @@
 | ----- | -------- | ---------- | ------------------------------------------------ |
 | 20/21 | FTP      | **No**     | Clear-text file transfer                         |
 | 22    | SFTP     | Yes        | FTP-like over SSH; completely different protocol |
-| 443   | FTPS     | Yes        | FTP over SSL (Explicit or Implicit)              |
+| 21 | Explicit FTPS | Yes after TLS negotiation | FTP control connection upgraded with AUTH TLS |
+| 990 | Implicit FTPS | Yes | FTP control connection starts with TLS |
 | 445   | SMB      | Optional   | Windows file sharing; use SMBv3 for encryption   |
 | 548   | AFP      | Optional   | Apple file sharing                               |
 
@@ -67,7 +68,7 @@
 
 | Port    | Protocol | Notes                                   |
 | ------- | -------- | --------------------------------------- |
-| 53      | DNS      | UDP for queries; TCP for zone transfers |
+| 53      | DNS      | UDP or TCP for queries; TCP for full zone transfers |
 | 67/68   | DHCP     | UDP; server on 67, client on 68         |
 | 161/162 | SNMP     | Monitoring (161); Traps (162)           |
 | 389     | LDAP     | Directory lookups                       |
@@ -79,6 +80,10 @@
 | ---- | -------- | ---------- |
 | 80   | HTTP     | No         |
 | 443  | HTTPS    | Yes (TLS)  |
+
+---
+
+> Sources: [FTP over TLS, RFC 4217](https://www.rfc-editor.org/info/rfc4217/), [IANA FTPS registration](https://www.iana.org/assignments/service-names-port-numbers?search=ftps), and [TLS email submission/access, RFC 8314](https://www.rfc-editor.org/info/rfc8314/). Extra operational ports here supplement the official objective list.
 
 ---
 
@@ -105,7 +110,7 @@ Creating a mental image that ties the port number to its function significantly 
 - **67/68** — Another pair (DHCP server/client)
 - **137–139** — NetBIOS occupies a range
 - **161/162** — SNMP pair (monitor + trap)
-- **Ports with "S" (secure) versions tend to add:** `0` (POP3 → 995) or move to 443/636/993
+- Learn secure-service ports explicitly; there is no arithmetic rule for converting an insecure port to its TLS counterpart.
 
 ---
 
@@ -119,7 +124,7 @@ Creating a mental image that ties the port number to its function significantly 
 
 - DNS queries, DHCP, SNMP, VoIP, streaming, TFTP
 
-**Both:** DNS (queries = UDP; zone transfers = TCP), NetBIOS, SNMP
+**Transport nuances:** DNS queries can use UDP or TCP; full zone transfers use TCP. NetBIOS uses different TCP/UDP ports for its services. SNMP commonly uses UDP 161/162. Modern RDP can also use UDP 3389, and HTTP/3 uses QUIC over UDP.
 
 ---
 

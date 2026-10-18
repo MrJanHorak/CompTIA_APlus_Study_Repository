@@ -11,9 +11,9 @@
 
 ## Purpose
 
-This repository provides a complete, community-maintained study resource for students preparing for the **CompTIA A+** certification. It integrates technical reference material with proven cognitive science learning strategies — spaced repetition, active recall, and the Feynman Technique — to move students beyond rote memorization toward genuine, exam-ready mastery.
+This repository provides a community-maintained study framework for students preparing for the **CompTIA A+** certification. It integrates technical reference material with learning strategies — spaced repetition, active recall, and the Feynman Technique — to move students beyond rote memorization toward genuine, exam-ready mastery.
 
-Whether you are a first-time IT student or an experienced technician refreshing your credentials for the 2025 Version 15 exams, this resource is designed to serve as your primary study hub.
+Whether you are a first-time IT student or an experienced technician refreshing your credentials for the 2025 Version 15 exams, use this framework alongside the official objectives and practical exercises. The notes are concise and do not replace a complete course or textbook.
 
 ---
 
@@ -28,12 +28,18 @@ Whether you are a first-time IT student or an experienced technician refreshing 
 
 ## Exam Version Overview
 
-| Exam   | Code (v14) | Code (v15) | Launch     |
-| ------ | ---------- | ---------- | ---------- |
-| Core 1 | 220-1101   | 220-1201   | Early 2025 |
-| Core 2 | 220-1102   | 220-1202   | Early 2025 |
+| Exam | Current code (V15) | Launch |
+| --- | --- | --- |
+| Core 1 | 220-1201 | March 25, 2025 |
+| Core 2 | 220-1202 | March 25, 2025 |
 
-> **Note:** Both v14 and v15 exams are currently active. Check the [CompTIA website](https://www.comptia.org/certifications/a) for exam retirement dates. The notes in this repository are aligned with **Version 15 (220-1201 / 220-1202)** objectives but call out major changes from v14 where relevant.
+The English V14 exams (220-1101/220-1102) retired September 25, 2025. References to V14 are historical. Both exams passed for certification must be from the same version.
+
+Use the [Core 1 objectives](https://lecbyo.files.cmp.optimizely.com/download/34be017cb73211ef8985a6f347fbf652) and [Core 2 objectives](https://lecbyo.files.cmp.optimizely.com/download/cefedfb2b8a511ef809306d06d323538), document version 4.0, as your scope checklist. Each exam allows up to 90 questions in 90 minutes. Passing scores are 675 (Core 1) and 700 (Core 2), on a 100–900 scale; these are not raw percentages.
+
+Exam metadata and selected resources reviewed October 18, 2026. Source: [CompTIA retirement announcement](https://www.linkedin.com/posts/comptia_comptia-aplus-itcertification-activity-7364690588685737984-Pdd1) and [course launch information](https://www.professormesser.com/free-a-plus-training/220-1201/220-1201-video/how-to-pass-your-a-plus-220-1101-and-220-1102-exams/). Check [CompTIA](https://www.comptia.org/certifications/a) before booking.
+
+See the [objective coverage map](Resources/Objective_Coverage.md) for note locations, remaining practice needs, and the distinction between repository filenames and official objective numbers.
 
 ---
 
@@ -69,7 +75,7 @@ Whether you are a first-time IT student or an experienced technician refreshing 
 
 5. **Complete Core 2 domains** using the same approach.
 
-6. **Run practice exams** (see [Resources/Recommended_Resources.md](Resources/Recommended_Resources.md)) until you score **85%+** consistently.
+6. **Run practice exams** (see [Resources/Recommended_Resources.md](Resources/Recommended_Resources.md)) using fresh questions, reviewing every error and guess. **85%+** is a study target, not a CompTIA pass-score conversion or guarantee.
 
 7. **Do at least two labs** from the `Labs/` directory to convert knowledge into hands-on skill.
 
@@ -107,6 +113,7 @@ A+ Resources/
 │
 ├── Resources/                        ← Learning tools and external links
 │   ├── Study_Strategies.md
+│   ├── Objective_Coverage.md          ← Objective-to-notes map and practice checklist
 │   ├── Recommended_Resources.md
 │   └── Flashcards/
 │       └── README.md
@@ -123,11 +130,11 @@ A+ Resources/
 
 | Domain | Topic                                                                                      | Exam Weight |
 | ------ | ------------------------------------------------------------------------------------------ | ----------- |
-| 1.0    | [Mobile Devices](Core_1/1.1_Mobile_Devices.md)                                             | ~15%        |
-| 2.0    | [Networking](Core_1/1.2_Networking.md)                                                     | ~23%        |
-| 3.0    | [Hardware](Core_1/1.3_Hardware.md)                                                         | ~25%        |
-| 4.0    | [Virtualization and Cloud Computing](Core_1/1.4_Virtualization_and_Cloud.md)               | ~12%        |
-| 5.0    | [Hardware and Network Troubleshooting](Core_1/1.5_Hardware_and_Network_Troubleshooting.md) | ~25%        |
+| 1.0    | [Mobile Devices](Core_1/1.1_Mobile_Devices.md)                                             | 13%        |
+| 2.0    | [Networking](Core_1/1.2_Networking.md)                                                     | 23%        |
+| 3.0    | [Hardware](Core_1/1.3_Hardware.md)                                                         | 25%        |
+| 4.0    | [Virtualization and Cloud Computing](Core_1/1.4_Virtualization_and_Cloud.md)               | 11%        |
+| 5.0    | [Hardware and Network Troubleshooting](Core_1/1.5_Hardware_and_Network_Troubleshooting.md) | 28%        |
 
 ---
 
@@ -135,10 +142,10 @@ A+ Resources/
 
 | Domain | Topic                                                              | Exam Weight |
 | ------ | ------------------------------------------------------------------ | ----------- |
-| 1.0    | [Operating Systems](Core_2/2.1_Operating_Systems.md)               | ~31%        |
-| 2.0    | [Security](Core_2/2.2_Security.md)                                 | ~25%        |
-| 3.0    | [Software Troubleshooting](Core_2/2.3_Software_Troubleshooting.md) | ~22%        |
-| 4.0    | [Operational Procedures](Core_2/2.4_Operational_Procedures.md)     | ~22%        |
+| 1.0    | [Operating Systems](Core_2/2.1_Operating_Systems.md)               | 28%        |
+| 2.0    | [Security](Core_2/2.2_Security.md)                                 | 28%        |
+| 3.0    | [Software Troubleshooting](Core_2/2.3_Software_Troubleshooting.md) | 23%        |
+| 4.0    | [Operational Procedures](Core_2/2.4_Operational_Procedures.md)     | 21%        |
 
 ---
 
@@ -152,7 +159,7 @@ Quick-reference documents designed for rapid review sessions and last-minute cra
 | [Hardware Reference](Cheat_Sheets/Hardware_Reference.md)                   | RAM pin counts, connector types, form factors |
 | [RAID Reference](Cheat_Sheets/RAID_Reference.md)                           | RAID levels, functions, fault tolerance       |
 | [Command-Line Reference](Cheat_Sheets/Command_Line_Reference.md)           | Windows, Linux, and macOS CLI commands        |
-| [Troubleshooting Methodology](Cheat_Sheets/Troubleshooting_Methodology.md) | CompTIA 6-step process with key actions       |
+| [Troubleshooting Methodology](Cheat_Sheets/Troubleshooting_Methodology.md) | Professional troubleshooting framework (not directly tested)       |
 
 ---
 
@@ -160,8 +167,9 @@ Quick-reference documents designed for rapid review sessions and last-minute cra
 
 | Resource                                                    | Description                                         |
 | ----------------------------------------------------------- | --------------------------------------------------- |
+| [Objective Coverage](Resources/Objective_Coverage.md) | Objective-to-notes map and practice checklist |
 | [Study Strategies](Resources/Study_Strategies.md)           | Spaced repetition, active recall, Feynman Technique |
-| [Recommended Resources](Resources/Recommended_Resources.md) | Vetted courses, practice exams, and free tools      |
+| [Recommended Resources](Resources/Recommended_Resources.md) | Courses, practice exams, and tools with review notes      |
 | [Flashcard Guide](Resources/Flashcards/README.md)           | How to build and use Anki/Quizlet decks             |
 
 ---
@@ -177,7 +185,7 @@ Quick-reference documents designed for rapid review sessions and last-minute cra
 
 ## Recommended Study Schedule
 
-This schedule uses the **spaced repetition** intervals proven by cognitive science research to maximize long-term retention.
+This is an example **spaced repetition** schedule. Adjust intervals to recall performance and available time; these dates are not a universally optimal prescription.
 
 | Review Session | Timing                      | Technique                                       |
 | -------------- | --------------------------- | ----------------------------------------------- |

@@ -1,175 +1,130 @@
 # Recommended Resources
 
-> Curated, community-vetted resources for CompTIA A+ (220-1201 / 220-1202) exam preparation.
+> Resources for CompTIA A+ 220-1201/220-1202, with access and review notes. Metadata reviewed October 18, 2026; inclusion is not a full-library endorsement.
 
----
+Start with the [objective coverage map](Objective_Coverage.md). Check the exam codes on every course, deck and book. Vendor pricing, access limits and availability can change.
 
 ## Video Courses
 
 ### Professor Messer
 
-**Website:** [professormesser.com](https://www.professormesser.com)
-**Cost:** Free (videos); paid study groups and study notes
+**Website:** [Core 1 course](https://www.professormesser.com/free-a-plus-training/220-1201/220-1201-video/220-1201-training-course/)
 
-The gold standard for free CompTIA content. Professor Messer's courses are meticulously mapped to the official exam objectives, making them ideal for initial learning and structured review.
+**Cost:** Free streamed videos, pop quizzes and regular monthly study groups; paid course notes and practice exams.
 
-| Resource                 | Description                                                       |
-| ------------------------ | ----------------------------------------------------------------- |
-| **Video Course**         | Free on his website; organized by exam objective (1.1, 1.2, etc.) |
-| **Study Notes (PDF)**    | Paid; a concise summary of each objective                         |
-| **Pop Quizzes**          | Mixed-domain short quizzes for active recall practice             |
-| **Monthly Study Groups** | Live review sessions covering upcoming exam topics                |
+Videos are organized by objective. Use the free [study-group replays](https://www.professormesser.com/free-a-plus-training/220-1201/220-1201-study-group/220-1201-a-plus-study-group-replay/) for question discussion and explanations. Review status: current course and free study-group listings checked; individual videos and paid materials were not comprehensively evaluated.
 
-**Best used for:** Building foundational understanding before drilling practice exams.
+### Total Seminars / Mike Meyers
 
----
+**Website:** [Total Seminars](https://totalsem.com/)
 
-### Mike Meyers
+**Cost:** Paid courses and books.
 
-**Platforms:** CompTIA A+ courses available on Udemy and Total Seminars
-**Cost:** Paid
+Check that the specific instructor/course covers **220-1201 and 220-1202**. Older Mike Meyers-branded materials remain useful background but are not automatically current. See the edition-specific book list below. Review status: book metadata checked; paid video-course content not reviewed.
 
-Mike Meyers is known for highly engaging, narrative-driven instruction. His books (co-authored with Total Seminars) are considered among the most comprehensive A+ textbooks available. His "All-in-One CompTIA A+ Certification Exam Guide" is a widely recommended reference.
+## Practice Questions
 
-**Best used for:** Students who prefer storytelling-based learning over objective-by-objective delivery.
+| Provider | Access | Use and review status |
+| --- | --- | --- |
+| [ExamCompass](https://www.examcompass.com/) | Free | Current Core 1/Core 2 sections checked; useful for topic drills, not a substitute for lab practice |
+| [Dion Training](https://www.diontraining.com/) | Paid; check the selected product | Choose the current exam codes; full question sets not reviewed here |
+| [Crucial Exams](https://crucialexams.com/) | Check current free allowance and paid plans | Optional question platform; current access tiers and full-library quality not verified |
 
----
+Treat difficulty comparisons as personal experience, not a promise that one provider predicts the real exam. Use fresh questions, review errors and guessed answers, and practice the underlying tasks. **85%+ is a repository study target, not a CompTIA passing percentage or guarantee.** See [practice-exam guidance](Study_Strategies.md#how-to-use-practice-exams-effectively).
 
-## Practice Exam Platforms
+## Official Scope and Supporting References
 
-### Jason Dion (Dion Training)
+| Resource | Purpose | Review notes |
+| --- | --- | --- |
+| [CompTIA Core 1 objectives](https://lecbyo.files.cmp.optimizely.com/download/34be017cb73211ef8985a6f347fbf652) | Official 220-1201 scope | Document version 4.0 checked |
+| [CompTIA Core 2 objectives](https://lecbyo.files.cmp.optimizely.com/download/cefedfb2b8a511ef809306d06d323538) | Official 220-1202 scope | Document version 4.0 checked |
+| [CompTIA A+ page](https://www.comptia.org/certifications/a) | Exam booking details and future objective revisions | Recheck before booking; objective PDFs above were accessible during review |
+| [ITFreeTraining](https://itfreetraining.com/) | Supplementary explanations | Visible A+ catalog names 220-1101/1102; treat as legacy and compare with current objectives |
+| [Microsoft Learn](https://learn.microsoft.com/en-us/training/) | Windows feature and command documentation | Match the documented OS version and edition |
+| [Oracle VirtualBox guide](https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/) | Installation, guests and networking | Use the guide for your installed release |
 
-**Platform:** [udemy.com](https://www.udemy.com) — search "Jason Dion CompTIA A+"
-**Cost:** Paid (frequently discounted on Udemy to $10–$20)
-
-Community consensus is that Dion's practice exams are **more difficult than the actual test**, which means students who consistently score well on his exams are well-prepared.
-
-| Feature         | Details                                                       |
-| --------------- | ------------------------------------------------------------- |
-| Question count  | Hundreds of questions across multiple full-length exams       |
-| Explanations    | Detailed rationale for **both correct and incorrect** answers |
-| Score target    | Aim for **85%+** before scheduling the real exam              |
-| Domain coverage | Aligned specifically to current exam objectives               |
-
-**Best used for:** Mock testing, strategy development, and detailed answer analysis.
-
----
-
-### ExamCompass
-
-**Website:** [examcompass.com](https://www.examcompass.com)
-**Cost:** Free
-
-Free, topic-specific quizzes organized by CompTIA domain. Excellent for drilling weak spots in a specific area without committing to a full practice exam.
-
-**Best used for:** Quick targeted drills on individual topics (e.g., "I need more questions specifically on RAID levels").
-
----
-
-### Crucial Exams
-
-**Website:** [crucialexams.com](https://www.crucialexams.com)
-**Cost:** Free basic / paid subscription for advanced features
-
-Offers practice questions with a mobile-friendly interface. Good for studying on the go between longer study sessions.
-
-**Best used for:** Mobile review sessions and performance tracking over time.
-
----
-
-## Free Reference Websites
-
-| Site                            | URL                                                     | Use                                                                                        |
-| ------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| **CompTIA Official Objectives** | [comptia.org](https://www.comptia.org/certifications/a) | Download the official exam objectives PDF (free) — the definitive list of testable content |
-| **Professor Messer**            | [professormesser.com](https://www.professormesser.com)  | Free video courses                                                                         |
-| **StationX Cheat Sheet**        | [stationx.net](https://www.stationx.net)                | Comprehensive A+ cheat sheets for 220-1201/1202                                            |
-| **ITFreeTraining**              | [itfreetraining.com](https://www.itfreetraining.com)    | Free video lectures with objective-level organization                                      |
-| **NICCS (CISA)**                | [niccs.cisa.gov](https://niccs.cisa.gov)                | US government resource; links A+ to job roles and cybersecurity frameworks                 |
-
----
+Use topic-specific, versioned sources when checking facts. Generic StationX and NICCS homepages have been omitted from this list because the previously claimed A+-specific destinations were not verified.
 
 ## Interactive Lab Platforms
 
-Hands-on practice is essential. Book knowledge alone is insufficient for performance-based questions (PBQs), which require you to configure, troubleshoot, or complete tasks in a simulated environment.
+Practical exercises help develop the configuration and diagnostic skills used in PBQs. A simulated exercise practices selected tasks; an OS VM or physical lab provides broader hands-on experience.
+
+### ExamWizardz — Browser PBQ Practice
+
+**Website:** [PBQ practice](https://www.examwizardz.app/pbq-practice) · [Lab simulations](https://www.examwizardz.app/comptia-a-plus-labs)
+
+**Cost:** Selected exercises are free without an account; additional content requires a free account or paid Pro access.
+
+Supplemental browser simulations for 220-1201/220-1202, including PC assembly, cable termination and IP troubleshooting. No local VM installation is needed for these exercises.
 
 ### CompTIA CertMaster Labs
 
-**Website:** [comptia.org/training/certmaster-labs](https://www.comptia.org/training/certmaster-labs)
-**Cost:** Paid (often bundled with exam vouchers)
+**Website:** [CompTIA lab training](https://www.comptia.org/training/certmaster-labs)
 
-Official CompTIA lab platform. Provides live virtual machines for practicing real-world technician tasks directly tied to exam objectives.
+**Cost:** Paid; confirm the specific product and bundle.
 
----
+Official training option. Before purchase, confirm that the selected product covers 220-1201/220-1202 and check whether activities use live systems, simulations or both. **Review status:** Current A+ product packaging and the paid lab library were not independently verified in this review.
 
 ### 101 Labs
 
-**Website:** [101labs.net](https://www.101labs.net)
-**Cost:** Free and paid tiers
+**Website:** [A+ course](https://www.101labs.net/courses/101-labs-comptia-a-certification/)
 
-Guided lab exercises using free software (VirtualBox, Cisco Packet Tracer, GNS3). No need to purchase expensive physical hardware.
+**Cost:** Paid course access; separate free exercises may be available.
 
-**Recommended labs for A+ students:**
+The course page identifies 220-1201/220-1202 and guided exercises using local VMs, trial software and network simulation tools. This differs from a lab that runs entirely inside the browser.
 
-- Network configuration using Packet Tracer
-- Windows Server installation and AD basics
-- Linux CLI exercises
+**Review status:** Course listing and exam codes checked; course exercises were not executed or comprehensively evaluated.
 
----
+### VirtualBox — Home Lab
 
-### VirtualBox (Free Home Lab)
+**Website:** [Official downloads](https://www.virtualbox.org/wiki/Downloads)
 
-**Website:** [virtualbox.org](https://www.virtualbox.org)
-**Cost:** Free
+**Cost:** Free base package; guest licensing and optional extensions have separate terms.
 
-A Type 2 hypervisor for building your own lab environment at no cost. See [Labs/Lab_01_Home_Lab_Setup.md](../Labs/Lab_01_Home_Lab_Setup.md) for a step-by-step setup guide.
+Build an Ubuntu VM using [Lab 01](../Labs/Lab_01_Home_Lab_Setup.md). VirtualBox is installed locally. A Windows guest requires an appropriate license or eligible evaluation.
 
----
+**Review status:** Oracle documentation checked; the revised local lab has not been executed end to end.
 
-## Flashcard Platforms
+## Flashcards
 
-| Platform        | Cost                            | Key Feature                                      |
-| --------------- | ------------------------------- | ------------------------------------------------ |
-| **Anki**        | Free (desktop/Android); $25 iOS | Spaced repetition algorithm; import shared decks |
-| **Quizlet**     | Free basic / paid               | Flashcards, matching games, tests                |
-| **FlashRecall** | Free / subscription             | A+-focused pre-built decks                       |
+| Platform | Cost | Use |
+| --- | --- | --- |
+| [Anki](https://apps.ankiweb.net/) / [AnkiDroid](https://ankidroid.org/) | Free desktop/Android; paid official AnkiMobile for iOS | Shared or self-created decks; FSRS and legacy SM-2 scheduling |
+| [Quizlet](https://quizlet.com/) | Free and paid features; check current regional plans | Self-created or community cards; check plan limits |
 
-> See [Resources/Flashcards/README.md](Flashcards/README.md) for specific deck recommendations and import instructions.
-
----
+Review individual cards against current objectives. No specific community deck is endorsed here. FlashRecall's previously claimed maintained A+-specific prebuilt decks were not verified, so it is omitted as a deck recommendation. See the [flashcard guide](Flashcards/README.md).
 
 ## Books
 
-| Title                                                            | Author         | Notes                                               |
-| ---------------------------------------------------------------- | -------------- | --------------------------------------------------- |
-| **CompTIA A+ Core 1 (220-1201) and Core 2 (220-1202) Exam Cram** | David Prowse   | Concise exam-focused reference; good cram companion |
-| **CompTIA A+ All-in-One Certification Exam Guide**               | Mike Meyers    | Comprehensive; narrative style                      |
-| **CompTIA A+ Complete Study Guide**                              | Quentin Docter | Covers both exams in one volume                     |
+Select the exact exam codes and edition. These metadata checks do not establish that every page or practice question is accurate.
 
----
+| Title and source | Edition / identifiers | Authors |
+| --- | --- | --- |
+| [CompTIA A+ Core 1 (220-1201) and Core 2 (220-1202) Exam Cram](https://www.pearson.com/en-us/subject-catalog/p/comptia-a-core-1-220-1201-and-core-2-220-1202-exam-cram/P200000014107/9780135446904) | 2nd edition; print ISBN 9780135446904; publisher catalog checked | David Bayne, Mark Smith, John Pickard (publisher listing) |
+| [CompTIA A+ Certification All-in-One Exam Guide](https://totalsem.com/product/comptia-a-certification-all-in-one-exam-guide/) | 12th edition; 220-1201/1202; check availability | Glen E. Clarke, Edward Tetz |
+| [CompTIA A+ Complete Study Guide](https://www.wiley.com/en-hk/comptia-a-complete-study-guide-2-volume-set-volume-1-core-1-exam-220-1201-and-volume-2-core-2-exam-220-1202-6th-edition-p-9781394330041) | 6th edition, two-volume set; paperback ISBN 9781394330034 | Quentin Docter, Jon Buhagiar |
 
-## Community and Discussion
+## Community
 
-| Community                         | URL                            | Notes                                                   |
-| --------------------------------- | ------------------------------ | ------------------------------------------------------- |
-| **r/CompTIA**                     | reddit.com/r/CompTIA           | Active community; exam experience reports; study advice |
-| **r/ITCareerQuestions**           | reddit.com/r/ITCareerQuestions | Career context for certification value                  |
-| **TechExams forums**              | techexams.net                  | Serious exam prep discussion                            |
-| **Professor Messer Study Groups** | professormesser.com            | Live monthly sessions                                   |
+- [r/CompTIA](https://www.reddit.com/r/CompTIA/) — discussion and study experiences; verify factual advice against primary sources.
+- [r/ITCareerQuestions](https://www.reddit.com/r/ITCareerQuestions/) — career discussion.
+- [Professor Messer study groups](https://www.professormesser.com/free-a-plus-training/220-1201/220-1201-study-group/220-1201-a-plus-study-group-replay/) — free question discussions.
 
----
+The former generic TechExams link is omitted pending verification of its current destination. Avoid recalled live-exam questions, dumps and affiliate links.
 
-## Resource Selection Guide
+## Choosing a Starting Point
 
-| If you are...                               | Start with...                                               |
-| ------------------------------------------- | ----------------------------------------------------------- |
-| Brand new to IT                             | Professor Messer videos + this repository's notes           |
-| Comfortable with hardware, weak on software | Core 2 notes + Dion practice exams                          |
-| A few weeks from exam                       | Dion practice exams + daily Anki review                     |
-| Struggling with a specific topic            | ExamCompass topic drill + Feynman Technique                 |
-| Looking for hands-on practice               | VirtualBox home lab + 101 Labs exercises                    |
-| On a tight budget                           | Professor Messer + ExamCompass + this repository (all free) |
+| Need | Starting point |
+| --- | --- |
+| New to IT | Official objectives, Messer videos and these notes |
+| Short browser practice | ExamWizardz's selected public exercises |
+| Direct OS experience | VirtualBox and Lab 01 |
+| Addressing and routing practice | Packet Tracer and Lab 02 |
+| Weak factual topic | ExamCompass drills and self-created flashcards |
+| Limited budget | Free videos, public exercises, Ubuntu and free base tools; check guest-license requirements |
 
----
+## Maintenance
+
+Recheck exam codes, support dates, external links, access terms and editions before releases and at least every six months. Evaluate accuracy, objective fit, feedback, usability and access transparency. Record what was actually tested and disclose complimentary reviewer access if used.
 
 _Previous: [Study Strategies](Study_Strategies.md) | Next: [Flashcard Guide](Flashcards/README.md)_

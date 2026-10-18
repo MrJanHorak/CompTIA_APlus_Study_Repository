@@ -1,214 +1,162 @@
 # Lab 01: Home Lab Setup with VirtualBox
 
-> **Skill Area:** Virtualization, OS installation, VM management
-> **Time Required:** 30–60 minutes
-> **Cost:** Free
-> **Tools:** VirtualBox, Ubuntu ISO (or Windows ISO)
+> **Skills:** Virtualization, OS installation, VM networking and snapshots
 
----
+> **Time:** Allow 60–120 minutes plus downloads
 
-## Objectives
+> **Cost:** Free base VirtualBox package and Ubuntu
 
-By the end of this lab you will be able to:
+> **Reference configuration:** VirtualBox 7.2; Ubuntu Desktop 26.04 LTS amd64 on a supported x86-64 host
 
-1. Install VirtualBox on a Windows or macOS host
-2. Create and configure a new Virtual Machine
-3. Install Ubuntu Linux (or Windows) as a guest OS
-4. Demonstrate understanding of VM Network modes (NAT vs Bridged)
-5. Take a VM snapshot and restore from it
+> **Validation:** Documentation reviewed October 18, 2026; this workflow has not been run end to end on that configuration.
 
----
+## Prerequisites and Architecture
 
-## Prerequisites
+Read the [host requirements](README.md#host-requirements-for-lab-01). Use a supported host OS and enough free memory and storage. Administrator privileges are needed to install VirtualBox's host drivers.
 
-- A host computer meeting the minimum lab requirements (see [Labs/README.md](README.md))
-- Virtualization enabled in BIOS/UEFI (Intel VT-x or AMD-V)
-- Internet connection to download tools
+- **Intel/AMD host:** Select the host installer and Ubuntu **amd64** ISO. On Windows, Task Manager → Performance → CPU should show virtualization enabled. If disabled, enable Intel VT-x/AMD-V in firmware using the PC manufacturer's instructions.
+- **Apple silicon:** Select the macOS Apple-silicon installer and an **Arm64** Ubuntu guest supported by that VirtualBox release. x86-64 guests cannot be virtualized on an Arm host. Unattended installation and Guest Additions features can differ; use [Oracle's compatibility information](https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/installation.html) before proceeding. The reference configuration above is the x86-64 path.
 
----
+The separately licensed VirtualBox Extension Pack is not required.
 
-## Part 1: Verify Virtualization Support
+## Part 1: Download and Install
 
-Before installing VirtualBox, confirm that hardware virtualization is enabled.
+1. Download VirtualBox from [Oracle](https://www.virtualbox.org/wiki/Downloads), matching your host OS and CPU.
+2. Download the **Ubuntu Desktop 26.04 LTS** ISO from [Ubuntu](https://ubuntu.com/download/desktop), matching your guest architecture. Choose the LTS release rather than following a changing “latest” release automatically.
+3. Install VirtualBox with its normal virtualization/networking components. A network-driver installation can briefly interrupt host networking.
+4. Launch VirtualBox Manager.
 
-### Windows
+Ubuntu's page lists at least 6 GB memory and 25 GB storage for this desktop release. This lab allocates more disk space for updates. Download sizes and menu wording vary by point release.
 
-1. Open **Task Manager** (Ctrl+Shift+Esc)
-2. Click the **Performance** tab
-3. Click **CPU**
-4. Look for **Virtualization: Enabled** in the lower right
+## Part 2: Create the Guest
 
-If it shows **Disabled:**
+Choose **New** in VirtualBox Manager.
 
-1. Restart the computer and enter BIOS/UEFI (usually F2, F10, Del, or F12 during POST)
-2. Navigate to the CPU or Advanced settings
-3. Enable **Intel VT-x** or **AMD-V** (varies by motherboard)
-4. Save and exit
+| Setting | Value |
+| --- | --- |
+| Name | Ubuntu-Lab |
+| ISO | The matching Ubuntu 26.04 LTS image |
+| OS type | Linux / Ubuntu, matching amd64 or Arm64 |
+| Installation | Skip unattended installation where that option exists |
+| RAM | 6144 MB minimum; 8192 MB if the host has enough spare memory |
+| vCPU | 2 |
+| Disk | New dynamically allocated VDI, 50 GB |
+| Networking | Adapter 1 attached to NAT |
 
----
+Leave sufficient resources for the host. Dynamic allocation saves initial disk use but the disk and snapshots can grow. Do not attach host physical disks.
 
-## Part 2: Download Required Files
+Start the VM, choose the installer and follow its language, keyboard and account prompts. Select the newly created **virtual** disk for installation. The installer's erase option is appropriate only after confirming this is the disposable 50 GB VM disk. Restart after installation; detach the ISO from the virtual optical drive if it boots the installer again.
 
-Download both files before starting installation:
+Inside the guest, install updates:
 
-| File                   | URL                                                                        | Size    |
-| ---------------------- | -------------------------------------------------------------------------- | ------- |
-| **VirtualBox**         | [virtualbox.org/wiki/Downloads](https://www.virtualbox.org/wiki/Downloads) | ~100 MB |
-| **Ubuntu Desktop ISO** | [ubuntu.com/download/desktop](https://ubuntu.com/download/desktop)         | ~4.7 GB |
+```bash
+sudo apt update
+sudo apt upgrade
+```
 
-> **Alternative:** If you want to practice with Windows, download a free evaluation ISO from [microsoft.com/evalcenter](https://www.microsoft.com/en-us/evalcenter). Choose "Windows 11 Enterprise Evaluation" — valid for 90 days.
+Restart the guest if prompted.
 
----
+## Part 3: Optional Guest Additions
 
-## Part 3: Install VirtualBox
+Guest Additions can improve display resizing and pointer integration. Features depend on the host/guest combination; shared clipboard and drag-and-drop require separate settings.
 
-1. Run the downloaded VirtualBox installer
-2. Accept all default options
-3. Allow the installer to install device drivers when prompted (these are necessary for VM network and USB support)
-4. Launch VirtualBox after installation completes
+For a supported Ubuntu guest:
 
----
+1. Install prerequisites:
 
-## Part 4: Create a New Virtual Machine
-
-1. In VirtualBox Manager, click **New**
-2. Configure as follows:
-
-| Setting   | Value                                       |
-| --------- | ------------------------------------------- |
-| Name      | `Ubuntu-Lab`                                |
-| Folder    | Default (or a folder on your largest drive) |
-| ISO Image | Browse to the Ubuntu ISO you downloaded     |
-| Type      | Linux                                       |
-| Version   | Ubuntu (64-bit)                             |
-
-3. Check **Skip Unattended Installation** (we want to see the full install process)
-4. Click **Next**
-
-### Allocate Hardware Resources
-
-| Setting           | Minimum | Recommended  |
-| ----------------- | ------- | ------------ |
-| Base Memory (RAM) | 1024 MB | 2048–4096 MB |
-| Processors (vCPU) | 1       | 2            |
-
-> Only allocate what your host can spare. Leave at least 4 GB of RAM for your host OS.
-
-5. Create a Virtual Hard Disk:
-   - **Disk size:** 20 GB minimum; 30–50 GB recommended
-   - **Type:** VDI (VirtualBox Disk Image)
-   - **Storage:** Dynamically allocated (only uses actual space; grows up to max)
-
-6. Review the summary and click **Finish**
-
----
-
-## Part 5: Install Ubuntu
-
-1. Select your `Ubuntu-Lab` VM and click **Start**
-2. Ubuntu will boot from the ISO
-3. Select **Try or Install Ubuntu**
-4. Click **Install Ubuntu**
-5. Configure:
-   - Language: English
-   - Keyboard: Your preference
-   - Network: Leave default for now
-   - Installation type: **Erase disk and install Ubuntu** (this is inside the VM — it will not affect your real computer)
-6. Set your username and password
-7. Wait for installation to complete (~10–20 minutes)
-8. Click **Restart Now** when prompted
-9. Press **Enter** when it asks you to remove the installation medium (VirtualBox handles this automatically)
-
----
-
-## Part 6: Install VirtualBox Guest Additions
-
-Guest Additions improves the VM experience by enabling:
-
-- Auto-resizing of the display
-- Shared clipboard between host and guest
-- Drag-and-drop file transfer
-- Improved mouse integration
-
-1. In the Ubuntu VM, click **Devices** (top menu bar in VirtualBox) → **Insert Guest Additions CD Image**
-2. Open a terminal in Ubuntu (right-click desktop → Open Terminal)
-3. Run:
    ```bash
    sudo apt update
    sudo apt install build-essential dkms linux-headers-$(uname -r)
-   sudo mount /dev/cdrom /media/cdrom
-   sudo /media/cdrom/VBoxLinuxAdditions.run
    ```
-4. Restart the VM: `sudo reboot`
 
----
+2. Use the VM window's **Devices → Insert Guest Additions CD Image**.
+3. If the guest did not mount the image automatically, mount it:
 
-## Part 7: Explore VM Network Modes
+   ```bash
+   sudo mkdir -p /mnt/vbox-additions
+   sudo mount /dev/sr0 /mnt/vbox-additions
+   ls /mnt/vbox-additions
+   ```
 
-Understanding VM network modes is an exam-ready skill. Practice by switching modes and observing behavior.
+4. Confirm the mounted image contains the installer, then run it:
 
-### Check Current Network Settings
+   ```bash
+   sudo sh /mnt/vbox-additions/VBoxLinuxAdditions.run
+   ```
 
-1. Shut down the Ubuntu VM
-2. In VirtualBox Manager, select the VM → **Settings** → **Network**
-3. **Adapter 1** is enabled; default mode is **NAT**
+5. Reboot and check whether the guest display resizes with the VM window.
 
-### Test Each Mode
+If the drive name, mount point or features differ, consult the [VirtualBox user guide](https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/). Do not run a guessed installer path or assume x86 feature parity on Arm.
 
-| Mode                 | Steps                                                                 | Expected Result                                                                                   |
-| -------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| **NAT**              | Keep default                                                          | Ubuntu gets internet access; not reachable from host network                                      |
-| **Bridged**          | Change to Bridged; start VM; run `ip addr`                            | Ubuntu gets an IP from your home DHCP (appears as a separate device on your LAN)                  |
-| **Host-Only**        | Change to Host-Only; start VM; run `ip addr`                          | Ubuntu gets an IP from VirtualBox's internal range (192.168.56.x); can communicate with host only |
-| **Internal Network** | Change to Internal; add a second VM to the same internal network name | VMs can communicate with each other only                                                          |
+## Part 4: Observe Networking
 
-**Record your observations in the table below:**
+Start with NAT. In Ubuntu, record addresses and routes:
 
-| Mode      | IP Address Received | Can ping 8.8.8.8? | Can ping host machine? |
-| --------- | ------------------- | ----------------- | ---------------------- |
-| NAT       |                     |                   |                        |
-| Bridged   |                     |                   |                        |
-| Host-Only |                     |                   |                        |
+```bash
+ip addr
+ip route
+```
 
----
+Open a browser to a known HTTPS site. A failed ping alone does not prove internet access is broken; networks may filter ICMP.
 
-## Part 8: Take and Restore a Snapshot
+Shut down the VM before changing Adapter 1's attachment mode.
 
-Snapshots are a critical VM management skill for both the exam and real-world technician work.
+| Mode | Setup | Expected behavior |
+| --- | --- | --- |
+| NAT | Keep the default adapter setting | Guest normally receives a VirtualBox DHCP address and can initiate external connections; unsolicited inbound access needs configuration |
+| Bridged | Select the correct physical interface on a permitted lab LAN | Guest can appear as another LAN device; DHCP/access depend on LAN policy and wireless/driver support |
+| Host-only | Create/select a host-only network; enable its DHCP server or configure static addresses | Host and guests on that network can communicate; no external routing by default |
+| Internal network | Attach two guests to the same internal network name; configure static addresses on that isolated network | Those guests can communicate; host/external access is absent by default |
 
-### Take a Snapshot
+Host-only is not limited to one guest talking only to the host. An internal network does not automatically supply DHCP.
 
-1. With Ubuntu running, click **Machine** → **Take Snapshot**
-2. Name it: `Clean Install - Before Changes`
-3. Click **OK**
+For the optional internal-network test, use 192.168.50.10/24 and 192.168.50.11/24 on the two guests, with no gateway. Use the guest network settings and actual interface names, then ping the peer. Restore NAT afterward.
 
-### Make a Change to "Break" the VM
+| Mode | Guest IP/mask | Default route | Host/peer reachable? | HTTPS works? |
+| --- | --- | --- | --- | --- |
+| NAT | | | | |
+| Bridged, if permitted | | | | |
+| Host-only | | | | |
+| Internal, optional | | | | |
 
-1. Open a terminal in Ubuntu
-2. Run: `sudo rm /etc/hosts`
-   _(This removes the hosts file — a harmless change to practice restoring from snapshot)_
-3. Try running: `ping localhost` — you should see a name resolution failure
+Source: [Oracle networking documentation](https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/networkingdetails.html).
 
-### Restore the Snapshot
+## Part 5: Prove Snapshot Restore with a Harmless File
 
-1. Shut down the VM
-2. In VirtualBox Manager, click the **Snapshots** icon (hamburger menu next to the VM name)
-3. Right-click the snapshot → **Restore Snapshot**
-4. Start the VM
-5. Verify: `ping localhost` — should work again
+1. In the guest terminal, create a marker:
 
----
+   ```bash
+   printf '%s\n' 'before snapshot' > ~/a-plus-snapshot.txt
+   cat ~/a-plus-snapshot.txt
+   ```
 
-## Lab Summary
+2. Shut down Ubuntu normally. In VirtualBox Manager's **Snapshots** view, take a snapshot named **Before marker change**.
+3. Start the VM. Change the marker and confirm the new content:
 
-Confirm you can now answer these questions without referring to the lab steps:
+   ```bash
+   printf '%s\n' 'after snapshot' > ~/a-plus-snapshot.txt
+   cat ~/a-plus-snapshot.txt
+   ```
 
-1. What setting in BIOS/UEFI must be enabled for VirtualBox to run 64-bit VMs?
-2. What is the difference between NAT and Bridged network mode in a VM context?
-3. What is the purpose of Guest Additions in VirtualBox?
-4. What is a VM snapshot and when would you use one in a real-world scenario?
-5. If you gave a VM 4 GB of RAM and your host only has 8 GB total, what risk does this create?
+4. Shut down the VM. Restore **Before marker change** from the Snapshots view. Restoring discards changes since that snapshot; retain another snapshot first if needed.
+5. Start Ubuntu. Run:
 
----
+   ```bash
+   cat ~/a-plus-snapshot.txt
+   ```
 
-_Next Lab: [Lab 02 — Network Simulation with Cisco Packet Tracer](Lab_02_Network_Simulation.md)_
+   **Expected:** `before snapshot`.
+
+This demonstrates disk-state rollback without deleting system files. Snapshots depend on the VM's storage chain and are not independent backups.
+
+## Review
+
+1. Why must a guest ISO match the host architecture for this VirtualBox lab?
+2. What distinguishes NAT, bridged, host-only and internal networking?
+3. Which modes need a separately configured DHCP server or static addresses?
+4. What changed when you restored the snapshot?
+5. Why must the host retain spare RAM and disk space?
+
+Record your host OS/architecture, VirtualBox version, Ubuntu release and observed results.
+
+_Next: [Lab 02 — Network Simulation](Lab_02_Network_Simulation.md)_

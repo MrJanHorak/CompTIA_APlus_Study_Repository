@@ -10,7 +10,7 @@ The most common student mistake is **passive re-reading** — going through note
 
 Two mechanisms from cognitive science address this directly:
 
-1. **The Forgetting Curve** (Ebbinghaus) — Without reinforcement, up to 70% of new information is lost within a week. Retention decays exponentially over time.
+1. **The Forgetting Curve** (Ebbinghaus) — Recall tends to decline without reinforcement; the rate depends on the learner, material and learning conditions.
 2. **The Testing Effect** — Being tested on material (even unsuccessfully) dramatically improves long-term retention compared to re-reading the same material.
 
 The strategies below are built on these principles.
@@ -21,9 +21,9 @@ The strategies below are built on these principles.
 
 ### What It Is
 
-Instead of reviewing material in a single long session ("cramming"), you distribute review sessions across increasing time intervals. Each review forces your brain to actively reconstruct the memory, which strengthens the neural pathway and resets the forgetting curve.
+Instead of reviewing material in a single long session ("cramming"), distribute review sessions over time and attempt recall before checking the answer. Adjust the intervals to your performance; the example below is a starting schedule, not a fixed scientific optimum.
 
-### Recommended Schedule
+### Example Review Schedule
 
 | Review Session | Timing Relative to Initial Learning | Suggested Technique                             |
 | -------------- | ----------------------------------- | ----------------------------------------------- |
@@ -35,7 +35,7 @@ Instead of reviewing material in a single long session ("cramming"), you distrib
 
 ### Implementation
 
-Use **Anki** (free, cross-platform) to automate the spaced repetition schedule. Anki's algorithm tracks which cards you struggle with and shows them more frequently, and shows easy cards less often.
+Use **Anki** (free desktop and AnkiDroid; paid AnkiMobile for iOS) to automate the spaced repetition schedule. Anki's algorithm tracks which cards you struggle with and shows them more frequently, and shows easy cards less often.
 
 - See [Resources/Flashcards/README.md](Flashcards/README.md) for Anki setup guidance.
 
@@ -133,12 +133,12 @@ Practice exams are a tool, not just a measurement. Use them actively:
 | Score     | Interpretation                                                         |
 | --------- | ---------------------------------------------------------------------- |
 | Below 70% | Do not sit the real exam; significant knowledge gaps remain            |
-| 70–79%    | Passing range for the real exam but not comfortable; continue studying |
+| 70–79% | Continue reviewing weak areas; this is not a CompTIA passing-score range |
 | 80–84%    | Acceptable confidence level if consistently achieved                   |
 | **85%+**  | Target score before scheduling the real exam                           |
 | 90%+      | High confidence; review remaining gaps briefly before exam day         |
 
-> **Professor Messer's guidance:** consistently scoring 85%+ on Jason Dion's practice exams (widely regarded as harder than the actual test) is a strong indicator of readiness.
+> **Study heuristic:** 85%+ on fresh, timed practice questions can be a useful target, but repeated-question memorization inflates scores. CompTIA uses scaled scores, not a published raw-percentage conversion. Check explanations, practical skills and objective coverage before booking.
 
 ---
 

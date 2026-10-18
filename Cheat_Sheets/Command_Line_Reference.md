@@ -47,7 +47,7 @@
 | `sfc /scannow`                               | System File Checker — scan and repair protected Windows files | Run as administrator; takes ~5 min                                          |
 | `dism /online /cleanup-image /restorehealth` | Repair Windows component store using Windows Update           | Run before or after SFC if SFC fails                                        |
 | `chkdsk`                                     | Check disk for file system errors                             | `/f` — fix errors; `/r` — find bad sectors; requires reboot on system drive |
-| `diskpart`                                   | Interactive disk partitioning tool                            | Commands: `list disk`, `select disk 0`, `clean`, `create partition primary` |
+| `diskpart`                                   | Interactive disk partitioning tool                            | Start with `list disk` and `detail disk`; verify the disposable lab disk before any destructive command |
 | `format`                                     | Format a volume                                               | `format D: /fs:NTFS /q` — quick format as NTFS                              |
 | `gpupdate /force`                            | Force Group Policy to re-apply                                | `/force` reapplies all policies                                             |
 | `shutdown`                                   | Shutdown or restart the computer                              | `/s /t 0` — immediate shutdown; `/r /t 0` — immediate restart               |
@@ -58,6 +58,10 @@
 | `regedit`                                    | Open Registry Editor                                          | Use with caution                                                            |
 | `net start <service>`                        | Start a Windows service                                       | `net start "Print Spooler"`                                                 |
 | `net stop <service>`                         | Stop a Windows service                                        | `net stop "Print Spooler"`                                                  |
+
+> **Destructive operations:** `diskpart clean`, formatting, recursive deletion and `robocopy /mir` can erase data. Practice only on a disposable VM disk or backed-up test folder. `/mir` deletes destination items absent from the source. Confirm the selected disk and destination before proceeding.
+
+---
 
 ### Boot and Recovery Commands (WinRE)
 
@@ -113,6 +117,10 @@
 | `lscpu`    | CPU information                                    | `msinfo32`                   |
 | `lsblk`    | List block devices (disks)                         | Disk Management              |
 | `fdisk -l` | List disks and partitions (root)                   | `diskpart list disk`         |
+
+> **Platform differences:** `ip`, `ss`, `free`, `lscpu` and `lsblk` are Linux tools, not standard macOS commands. On macOS use tools such as `ifconfig`, `route -n get default`, `netstat`, `vm_stat`, `system_profiler` and `diskutil`. Package managers and command options also vary; consult `man` on the target system.
+
+---
 
 ### Networking Commands (Linux/macOS)
 
